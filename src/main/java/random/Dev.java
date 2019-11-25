@@ -82,13 +82,13 @@ public class Dev {
 
     private JSONObject getData() {
 	try {
-		return getJsonData();
+	     return getJsonData();
 	} catch (MalformedURLException e) {
-		e.printStackTrace();
-		System.exit(1);
+	     e.printStackTrace();
+	     System.exit(1);
 	} catch (IOException e) {
-		e.printStackTrace();
-		System.exit(1);
+	     e.printStackTrace();
+	     System.exit(1);
 	}
 	    
 	return null;
@@ -118,11 +118,11 @@ public class Dev {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
-			}
 		}
+	}
 		
-		jsonObject = new JSONObject(data.toString());
-		return jsonObject;
+	jsonObject = new JSONObject(data.toString());
+	return jsonObject;
      }
 	
      private void setEntropyPool() {
