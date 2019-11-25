@@ -36,7 +36,7 @@ public class Dev {
 
     private final static String URL = "https://qrng.anu.edu.au/API/jsonI.php?"; 
 
-	private JSONObject data;
+    private JSONObject data;
 
     private int length;
     
@@ -69,7 +69,7 @@ public class Dev {
             System.exit(1);
     }
 
-	private void setDataType(String dataType) {
+    private void setDataType(String dataType) {
         switch (dataType) {
             case "uint8":
             case "uint16":
@@ -78,9 +78,9 @@ public class Dev {
             default:  
                 System.exit(1);
         }
-	}
+    }
 
-	private JSONObject getData() {
+    private JSONObject getData() {
 		try {
 			return getJsonData();
 		} catch (MalformedURLException e) {
@@ -91,9 +91,9 @@ public class Dev {
 			System.exit(1);
 		}
 		return null;
-	}
+     }
 	
-	private JSONObject getJsonData() throws MalformedURLException, IOException   {
+     private JSONObject getJsonData() throws MalformedURLException, IOException   {
         // full URL example https://qrng.anu.edu.au/API/jsonI.php?length=1024&type=uint16
 
         String length = String.valueOf(this.length);
@@ -123,19 +123,19 @@ public class Dev {
 		
 		jsonObject = new JSONObject(data.toString());
 		return jsonObject;
-	}
+     }
 	
-	private void setEntropyPool() {
+     private void setEntropyPool() {
 		this.data = getData();
 		this.entropyPool = new EntropyPool(this.data);
-	}
+     }
 	
-	private Integer getNext() {
+     private Integer getNext() {
 		Integer value = this.entropyPool.getNext();
 		return value;
-	}
+     }
 	
-	public int random() {
+     public int random() {
 		Integer value = getNext();
 		
 		if (value == null) {
@@ -145,9 +145,9 @@ public class Dev {
 		}
 		
 		return value.intValue();
-	}
+     }
 	
-	public static void main(String[] args) {
+     public static void main(String[] args) {
 		int size = args.length;
 		
 		if (size > 3) 
@@ -163,6 +163,6 @@ public class Dev {
 		dev = new Dev();
 		System.out.println(dev.random());
 		System.exit(1);
-	}
+     }
 	
 }
