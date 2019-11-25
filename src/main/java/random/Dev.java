@@ -44,16 +44,16 @@ public class Dev {
     
     private EntropyPool entropyPool;
 
-	public Dev() {
-        this.length = MAX_LENGTH;
-        this.dataType = DEFAULT_DATA_TYPE;
-        setEntropyPool();
-	}
+    public Dev() {
+       this.length = MAX_LENGTH;
+       this.dataType = DEFAULT_DATA_TYPE;
+       setEntropyPool();
+    }
 
-	public Dev(int length) {
-		setLength(length);
-        this.dataType = DEFAULT_DATA_TYPE;
-        setEntropyPool();
+    public Dev(int length) {
+       setLength(length);
+       this.dataType = DEFAULT_DATA_TYPE;
+       setEntropyPool();
     }
     
     public Dev(int length, String dataType) {
@@ -81,16 +81,17 @@ public class Dev {
     }
 
     private JSONObject getData() {
-		try {
-			return getJsonData();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-			System.exit(1);
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.exit(1);
-		}
-		return null;
+	try {
+		return getJsonData();
+	} catch (MalformedURLException e) {
+		e.printStackTrace();
+		System.exit(1);
+	} catch (IOException e) {
+		e.printStackTrace();
+		System.exit(1);
+	}
+	    
+	return null;
      }
 	
      private JSONObject getJsonData() throws MalformedURLException, IOException   {
@@ -104,20 +105,19 @@ public class Dev {
         BufferedReader bufferedReader = null;
         JSONObject jsonObject = null;
 
+	try {
+		URL url = new URL(urlString);
+		URLConnection urlConnection = url.openConnection();
+		InputStreamReader inputStream = new InputStreamReader(urlConnection.getInputStream());
+		bufferedReader = new BufferedReader(inputStream);
+		data = bufferedReader.readLine();
+	} finally {
 		try {
-			URL url = new URL(urlString);
-			URLConnection urlConnection = url.openConnection();
-			InputStreamReader inputStream = new InputStreamReader(urlConnection.getInputStream());
-			bufferedReader = new BufferedReader(inputStream);
-			data = bufferedReader.readLine();
-		} finally {
-			try {
-				if (bufferedReader != null) {
-					bufferedReader.close();
-				}
+			if (bufferedReader != null) {
+				bufferedReader.close();
 			}
-			catch (IOException e) {
-				e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 			}
 		}
 		
@@ -126,43 +126,43 @@ public class Dev {
      }
 	
      private void setEntropyPool() {
-		this.data = getData();
-		this.entropyPool = new EntropyPool(this.data);
+	this.data = getData();
+	this.entropyPool = new EntropyPool(this.data);
      }
 	
      private Integer getNext() {
-		Integer value = this.entropyPool.getNext();
-		return value;
+	Integer value = this.entropyPool.getNext();
+	return value;
      }
 	
      public int random() {
-		Integer value = getNext();
+	Integer value = getNext();
 		
-		if (value == null) {
-			// if we get here pool is empty mimic a block and refill it
-			setEntropyPool();
-			value = getNext();
-		}
+	if (value == null) {
+	   // if we get here pool is empty mimic a block and refill it
+	   setEntropyPool();
+	   value = getNext();
+	}
 		
-		return value.intValue();
+	return value.intValue();
      }
 	
      public static void main(String[] args) {
-		int size = args.length;
+	int size = args.length;
 		
-		if (size > 3) 
-			System.exit(1);
+	if (size > 3) 
+	   System.exit(1);
 		
-		Dev dev = null;
-		if (size > 0) {
-			dev = new Dev(Integer.parseInt(args[0]), args[1]);
-			System.out.println(dev.random());
-			System.exit(1);
-		}
+	Dev dev = null;
+	if (size > 0) {
+	   dev = new Dev(Integer.parseInt(args[0]), args[1]);
+	   System.out.println(dev.random());
+	   System.exit(1);
+	}
 		
-		dev = new Dev();
-		System.out.println(dev.random());
-		System.exit(1);
+	dev = new Dev();
+	System.out.println(dev.random());
+	System.exit(1);
      }
 	
 }
