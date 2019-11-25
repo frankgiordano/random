@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Built-By: FrankGiordano
+Build-Jdk: 1.8.0_71
+Main-Class: random.Dev
+Created-By: Maven Integration for Eclipse
+
