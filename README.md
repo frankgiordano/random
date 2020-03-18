@@ -1,4 +1,4 @@
-#random
+# random
 
 Build a clone of $ cat /dev/random generating your own entropy. 
 
