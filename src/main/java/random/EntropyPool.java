@@ -7,27 +7,27 @@ import org.json.JSONObject;
 
 public class EntropyPool {
 
-	private LinkedList<Integer> dataPool;
+    private LinkedList<Integer> dataPool;
 
-	public EntropyPool(JSONObject data) {
-		parseJSONObject(data);
-	}
+    public EntropyPool(JSONObject data) {
+        parseJSONObject(data);
+    }
 
-	private void parseJSONObject(JSONObject data) {
-		if (data == null)
-			System.exit(1);
+    private void parseJSONObject(JSONObject data) {
+        if (data == null)
+            System.exit(1);
 
-		dataPool = new LinkedList<Integer>();
+        dataPool = new LinkedList<Integer>();
 
-		JSONArray values = data.getJSONArray("data");
-		for (int i = 0; i < values.length(); i++) {
-			dataPool.add(values.getInt(i));
-		}
-	}
+        JSONArray values = data.getJSONArray("data");
+        for (int i = 0; i < values.length(); i++) {
+            dataPool.add(values.getInt(i));
+        }
+    }
 
-	public Integer getNext() {
-		Integer value = dataPool.poll();
-		return value;
-	}
+    public Integer getNext() {
+        Integer value = dataPool.poll();
+        return value;
+    }
 
 }
