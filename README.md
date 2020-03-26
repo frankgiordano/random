@@ -12,13 +12,11 @@ At project's root directory, perform the following commands:
  
 3 - mvn clean package 
 
-Find dev.random.jar generated within project/target directory
+4 - Ways to run the program:
  
-Ways to run the program:
- 
-java -jar dev.random.jar
+java -jar .\target\dev.random.jar
   
-java -jar dev.random.jar 100 uint16
+java -jar .\target\dev.random.jar 100 uint16
   
-java -jar dev.random.jar 10 uint8
+java -jar .\target\dev.random.jar 10 uint8
 
